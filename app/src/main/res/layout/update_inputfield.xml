@@ -20,7 +20,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/colorPopTopNav"
-                android:text="Add Shopping List"
+                android:text="Update Shopping List"
                 android:padding="10dp"
                 android:textColor="@color/colorTitleListHeader"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
@@ -49,7 +49,7 @@
                     android:layout_height="wrap_content">
 
                     <EditText
-                        android:id="@+id/edt_name"
+                        android:id="@+id/edt_name_upd"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
@@ -86,7 +86,7 @@
                     android:layout_height="wrap_content">
 
                     <EditText
-                        android:id="@+id/edt_type"
+                        android:id="@+id/edt_type_upd"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
@@ -123,7 +123,7 @@
                     android:layout_height="wrap_content">
 
                     <EditText
-                        android:id="@+id/edt_amount"
+                        android:id="@+id/edt_amount_upd"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
@@ -136,16 +136,43 @@
                 </RelativeLayout>
             </LinearLayout>
 
-            <Button
-                android:id="@+id/btn_save"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:background="@color/colorPrimaryDark"
-                android:textColor="@color/colorCardsText"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:text="Add item"/>
+                android:orientation="horizontal">
 
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content">
+
+                    <Button
+                        android:id="@+id/btn_delete"
+                        android:text="Delete"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:background="@color/colorPrimaryDark"
+                        android:textColor="@color/colorCardsText"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content">
+
+                    <Button
+                        android:id="@+id/btn_update"
+                        android:text="Save"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:background="@color/colorPrimaryDark"
+                        android:textColor="@color/colorCardsText"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+                </RelativeLayout>
+            </LinearLayout>
         </LinearLayout>
 
     </ScrollView>
