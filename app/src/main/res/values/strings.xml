@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">ShoppingAssistant</string>
+    <string name="total_amount">Total Amount:</string>
+    <string name="_0000">0000</string>
+</resources>
