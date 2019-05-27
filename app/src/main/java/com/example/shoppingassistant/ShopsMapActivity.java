@@ -1,32 +1,48 @@
 package com.example.shoppingassistant;
 
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentActivity;
 
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.net.Uri;
 import android.os.Bundle;
 
+import com.example.shoppingassistant.Model.ItemType;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.tasks.OnSuccessListener;
 
 import java.util.ArrayList;
+
+import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 
 public class ShopsMapActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
+    private FusedLocationProviderClient clientLocation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shops_map);
-        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+//        String itemType = getIntent().getStringExtra("itemType");
     }
 
+    private void requestPermissions() {
+        ActivityCompat.requestPermissions(this, new String[]{ACCESS_FINE_LOCATION}, 1);
+    }
 
     /**
      * Manipulates the map once available.
@@ -41,9 +57,26 @@ public class ShopsMapActivity extends FragmentActivity implements OnMapReadyCall
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        // Add a marker in Sydney and move the camera
-        LatLng infoUAIC = new LatLng(47.1739724, 27.5727224);
-        mMap.addMarker(new MarkerOptions().position(infoUAIC).title("UAIC Corp C"));
+        requestPermissions();
+
+        clientLocation = LocationServices.getFusedLocationProviderClient(this);
+
+        if(ActivityCompat.checkSelfPermission(ShopsMapActivity.this, ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            return;
+        } else {
+            clientLocation.getLastLocation().addOnSuccessListener(ShopsMapActivity.this, new OnSuccessListener<Location>() {
+                @Override
+                public void onSuccess(Location location) {
+                    if(location != null) {
+                        LatLng infoUAIC = new LatLng(location.getLatitude(), location.getLongitude());
+                        mMap.addMarker(new MarkerOptions().position(infoUAIC).title("UAIC Corp C"));
+                        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(infoUAIC, 15f));
+
+                    }
+                }
+            });
+        }
+
 
 //        ZoomLevel
 //        1: World
@@ -52,13 +85,5 @@ public class ShopsMapActivity extends FragmentActivity implements OnMapReadyCall
 //        15: Streets
 //        20: Buildings
 
-        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(infoUAIC, 15f));
-
-//                Uri gmmIntentUri = Uri.parse("geo:0,0?q=UAIC+Corp+C");
-//                Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
-//                mapIntent.setPackage("com.google.android.apps.maps");
-//                if (mapIntent.resolveActivity(getPackageManager()) != null) {
-//                    startActivity(mapIntent);
-//                }
     }
 }

@@ -2,7 +2,10 @@ package com.example.shoppingassistant.Model;
 
 public enum ItemType {
     Unknown,
-    Foods,
-    Tools,
-    Electronics,
+    Food,
+    Tool,
+    Electronic,
+    Book,
+    Clothing,
+    Pharmacy
 }

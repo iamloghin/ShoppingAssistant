@@ -175,7 +175,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="jar:file:/C:/Users/aloghin/AppData/Local/JetBrains/Toolbox/apps/AndroidStudio/ch-0/191.5549111/plugins/android/lib/android.jar!/images/material_design_icons/content/ic_add_black_24dp.xml" />
+                                      <entry key="url" value="jar:file:/C:/Users/Alex/AppData/Local/JetBrains/Toolbox/apps/AndroidStudio/ch-0/191.5549111/plugins/android/lib/android.jar!/images/material_design_icons/maps/ic_add_location_black_24dp.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -185,7 +185,8 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="outputName" value="plus" />
+                            <entry key="color" value="202020" />
+                            <entry key="outputName" value="pin" />
                             <entry key="sourceFile" value="C:\Users\aloghin" />
                           </map>
                         </option>

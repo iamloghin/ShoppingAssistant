@@ -4,10 +4,14 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Geocoder;
+import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -26,6 +30,9 @@ import android.widget.Toast;
 import com.example.shoppingassistant.Model.Data;
 import com.example.shoppingassistant.Model.ItemType;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -37,6 +44,8 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.text.DateFormat;
 import java.util.Date;
+
+import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -51,6 +60,10 @@ public class HomeActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
 
     private TextView totalSumResult;
+
+    private FusedLocationProviderClient clientLocation;
+    Double latitude,longitude;
+    Geocoder geocoder;
 
     // Global vars
     private ItemType type;
@@ -194,6 +207,17 @@ public class HomeActivity extends AppCompatActivity {
                 final TextView update_amount = myViewHolder.myView.findViewById(R.id.amount);
                 final CheckBox update_checked = myViewHolder.myView.findViewById(R.id.checked);
 
+                myViewHolder.myView.findViewById(R.id.item_map).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+//                        Intent intent = new Intent(getApplicationContext(), ShopsMapActivity.class);
+//                        intent.putExtra("itemType", data.getType().toString());
+//                        startActivity(intent);
+
+                        getNearStores(data.getType().toString());
+                    }
+                });
+
                 myViewHolder.myView.findViewById(R.id.checked).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -331,11 +355,7 @@ public class HomeActivity extends AppCompatActivity {
         btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //mDatabase.child(post_key).removeValue();
-
-                // maps
-                Intent myIntent = new Intent(HomeActivity.this, ShopsMapActivity.class);
-                HomeActivity.this.startActivity(myIntent);
+                mDatabase.child(post_key).removeValue();
 
                 dialog.dismiss();
             }
@@ -343,4 +363,63 @@ public class HomeActivity extends AppCompatActivity {
 
         dialog.show();
     }
+
+
+    public void getNearStores(String itemType) {
+        requestPermissions();
+
+        clientLocation = LocationServices.getFusedLocationProviderClient(this);
+
+        if(ActivityCompat.checkSelfPermission(HomeActivity.this, ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            latitude = 0.0;
+            longitude = 0.0;
+        } else {
+            clientLocation.getLastLocation().addOnSuccessListener(HomeActivity.this, new OnSuccessListener<Location>() {
+                @Override
+                public void onSuccess(Location location) {
+                    if(location != null) {
+                        latitude = location.getLatitude();
+                        longitude = location.getLongitude();
+                    }
+                }
+            });
+        }
+
+//        String itemType = getIntent().getStringExtra("itemType");
+
+        String mainCategory = "unknown";
+
+        switch (ItemType.valueOf(itemType)) {
+            case Food:
+                mainCategory = "market";
+                break;
+            case Tool:
+                mainCategory = "home improvement store";
+                break;
+            case Electronic:
+                mainCategory = "electronics store";
+                break;
+            case Book:
+                mainCategory = "bookstore";
+                break;
+            case Clothing:
+                mainCategory = "clothing store";
+                break;
+            case Pharmacy:
+                mainCategory = "pharmacy";
+                break;
+        }
+
+        Uri gmmIntentUri = Uri.parse("geo:"+ latitude +"," + longitude + "?q="+mainCategory);
+        Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+        mapIntent.setPackage("com.google.android.apps.maps");
+        if (mapIntent.resolveActivity(getPackageManager()) != null) {
+            startActivity(mapIntent);
+        }
+    }
+
+    private void requestPermissions() {
+        ActivityCompat.requestPermissions(this, new String[]{ACCESS_FINE_LOCATION}, 1);
+    }
+
 }
