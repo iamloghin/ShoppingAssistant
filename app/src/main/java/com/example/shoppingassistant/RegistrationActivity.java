@@ -22,7 +22,7 @@ public class RegistrationActivity extends AppCompatActivity {
 
     private EditText email;
     private EditText pass;
-    private TextView sigin;
+    private TextView signup;
     private Button btnReg;
 
     private FirebaseAuth mAuth;
@@ -38,7 +38,7 @@ public class RegistrationActivity extends AppCompatActivity {
 
         email = findViewById(R.id.email_reg);
         pass = findViewById(R.id.password_reg);
-        sigin = findViewById(R.id.signin_txt);
+        signup = findViewById(R.id.signup_txt);
         btnReg = findViewById(R.id.btn_reg);
 
         btnReg.setOnClickListener(new View.OnClickListener() {
@@ -76,7 +76,7 @@ public class RegistrationActivity extends AppCompatActivity {
             }
         });
 
-        sigin.setOnClickListener(new View.OnClickListener() {
+        signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getApplicationContext(), MainActivity.class));

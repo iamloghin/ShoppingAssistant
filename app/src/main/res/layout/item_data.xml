@@ -19,13 +19,15 @@
 
             <TextView
                 android:id="@+id/date"
-                android:text="16 Feb, 2019"
-                android:padding="5dp"
-                android:textAppearance="@style/TextAppearance.AppCompat.Small"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/colorCardsText"
-                android:background="@color/colorPopTopNav"/>
+                android:background="@color/colorPopTopNav"
+                android:fontFamily="@font/open_sans_light"
+                android:padding="5dp"
+                android:text="16 Feb, 2019"
+                android:textAllCaps="true"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:textColor="@color/textBackColor" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -35,26 +37,31 @@
 
             <TextView
                 android:id="@+id/name"
-                android:text="Unknown"
-                android:maxLines="1"
-                android:padding="5dp"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/colorCardsText"
-                android:background="@color/colorPopTopNav"/>
+                android:background="@color/colorPopTopNav"
+                android:fontFamily="@font/open_sans_bold"
+                android:maxLines="1"
+                android:padding="5dp"
+                android:text="Unknown"
+                android:textAllCaps="true"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="@color/textFocusColor" />
 
             <TextView
                 android:id="@+id/type"
-                android:layout_below="@id/name"
-                android:text="Unknown"
-                android:maxLines="1"
-                android:padding="5dp"
-                android:textAppearance="@style/TextAppearance.AppCompat.Small"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/colorCardsText"
-                android:background="@color/colorPopTopNav"/>
+                android:layout_below="@id/name"
+                android:background="@color/colorPopTopNav"
+                android:fontFamily="@font/open_sans_semibold"
+                android:maxLines="1"
+                android:padding="5dp"
+                android:text="Unknown"
+                android:textAllCaps="true"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:textColor="@color/textBackColor"
+                android:textSize="12sp" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -64,13 +71,14 @@
 
             <TextView
                 android:id="@+id/amount"
-                android:text="100"
-                android:padding="5dp"
-                android:textAppearance="@style/TextAppearance.AppCompat.Small"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/colorCardsText"
-                android:background="@color/colorPopTopNav"/>
+                android:background="@color/colorPopTopNav"
+                android:fontFamily="@font/open_sans_bold"
+                android:padding="5dp"
+                android:text="100"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:textColor="@color/textFocusColor" />
         </RelativeLayout>
 
 

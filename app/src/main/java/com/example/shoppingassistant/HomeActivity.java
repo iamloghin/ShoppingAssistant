@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 import com.example.shoppingassistant.Model.Data;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -29,6 +30,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+
 
 import java.text.DateFormat;
 import java.util.Date;
@@ -125,12 +128,10 @@ public class HomeActivity extends AppCompatActivity {
 
         dialog.setView(myview);
 
-
         final EditText type = myview.findViewById(R.id.edt_type);
         final EditText amount = myview.findViewById(R.id.edt_amount);
         final EditText name = myview.findViewById(R.id.edt_name);
         Button btn = myview.findViewById(R.id.btn_save);
-
 
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -140,7 +141,7 @@ public class HomeActivity extends AppCompatActivity {
                 String mName = name.getText().toString().trim();
 
                 if(TextUtils.isEmpty(mType)){
-                    type.setError("Required Field...");
+                    amount.setError("Required Field...");
                     return;
                 }
                 if(TextUtils.isEmpty(mAmount)){
@@ -159,8 +160,6 @@ public class HomeActivity extends AppCompatActivity {
                 Data data = new Data(mType, amount, mName, date, id);
 
                 mDatabase.child(id).setValue(data);
-
-//                Toast.makeText(HomeActivity.this, "", Toast.LENGTH_SHORT).show();
 
                 Toast.makeText(getApplicationContext(), "Data add", Toast.LENGTH_SHORT).show();
 
@@ -303,8 +302,9 @@ public class HomeActivity extends AppCompatActivity {
         btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mDatabase.child(post_key).removeValue();
+//                mDatabase.child(post_key).removeValue();
 
+                startActivity(new Intent(getApplicationContext(), MapsActivity.class));
                 dialog.dismiss();
             }
         });

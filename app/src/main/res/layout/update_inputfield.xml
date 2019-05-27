@@ -8,7 +8,8 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@drawable/round_popup">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -19,11 +20,14 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/colorPopTopNav"
-                android:text="Update Shopping List"
+                android:fontFamily="@font/open_sans_bold"
                 android:padding="10dp"
-                android:textColor="@color/colorTitleListHeader"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+                android:text="Update Shopping List"
+                android:textAllCaps="true"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="@color/textBackColor"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -38,10 +42,18 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Name:"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:fontFamily="@font/open_sans_semibold"
+                        android:text="Name"
+                        android:textAllCaps="true"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                        android:layout_margin="10dp"
-                        android:textColor="@color/colorCardsText"/>
+                        android:textColor="@color/textFocusColor"
+                        android:textSize="18sp" />
                 </RelativeLayout>
                 <RelativeLayout
                     android:layout_width="0dp"
@@ -50,15 +62,21 @@
 
                     <EditText
                         android:id="@+id/edt_name_upd"
+                        android:paddingVertical="8dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
-                        android:hint="Product"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:paddingLeft="15dp"
+                        android:background="@drawable/round_input"
+                        android:fontFamily="@font/open_sans_light"
                         android:maxLines="1"
-                        android:textColor="@color/colorCardsText"
-                        android:textColorHint="@color/colorCardsText"
-                        android:background="@color/colorSecondBackground"
-                        />
+                        android:textColor="@color/textFocusColor"
+                        android:textColorHint="@color/textBackColor" />
                 </RelativeLayout>
             </LinearLayout>
 
@@ -75,10 +93,17 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Type:"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:fontFamily="@font/open_sans_semibold"
+                        android:text="Type"
+                        android:textAllCaps="true"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                        android:layout_margin="10dp"
-                        android:textColor="@color/colorCardsText"/>
+                        android:textColor="@color/textFocusColor" />
                 </RelativeLayout>
                 <RelativeLayout
                     android:layout_width="0dp"
@@ -90,11 +115,13 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
-                        android:hint="Unknown"
                         android:maxLines="1"
-                        android:textColor="@color/colorCardsText"
-                        android:textColorHint="@color/colorCardsText"
-                        android:background="@color/colorSecondBackground"
+                        android:textColor="@color/textFocusColor"
+                        android:textColorHint="@color/textBackColor"
+                        android:background="@drawable/round_input"
+                        android:fontFamily="@font/open_sans_light"
+                        android:paddingLeft="15dp"
+                        android:paddingVertical="8dp"
                         />
                 </RelativeLayout>
             </LinearLayout>
@@ -112,10 +139,17 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Amount:"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:fontFamily="@font/open_sans_semibold"
+                        android:text="Amount"
+                        android:textAllCaps="true"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                        android:layout_margin="10dp"
-                        android:textColor="@color/colorCardsText"/>
+                        android:textColor="@color/textFocusColor" />
                 </RelativeLayout>
                 <RelativeLayout
                     android:layout_width="0dp"
@@ -126,13 +160,20 @@
                         android:id="@+id/edt_amount_upd"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
-                        android:hint="1"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:paddingLeft="15dp"
+                        android:background="@drawable/round_input"
+                        android:fontFamily="@font/open_sans_light"
+                        android:text="1"
                         android:maxLines="1"
-                        android:textColor="@color/colorCardsText"
-                        android:textColorHint="@color/colorCardsText"
-                        android:background="@color/colorSecondBackground"
-                        />
+                        android:paddingVertical="8dp"
+                        android:textColor="@color/textFocusColor"
+                        android:textColorHint="@color/textBackColor" />
                 </RelativeLayout>
             </LinearLayout>
 
@@ -148,13 +189,21 @@
 
                     <Button
                         android:id="@+id/btn_delete"
-                        android:text="Delete"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
-                        android:background="@color/colorPrimaryDark"
-                        android:textColor="@color/colorCardsText"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:background="@drawable/round_button"
+                        android:focusable="true"
+                        android:fontFamily="@font/open_sans_bold"
+                        android:paddingVertical="10dp"
+                        android:text="Delete"
+                        android:textAllCaps="true"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:textColor="@color/textFocusColor"
+                        android:textIsSelectable="true"  />
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -164,13 +213,21 @@
 
                     <Button
                         android:id="@+id/btn_update"
-                        android:text="Save"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
-                        android:background="@color/colorPrimaryDark"
-                        android:textColor="@color/colorCardsText"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:background="@drawable/round_button"
+                        android:focusable="true"
+                        android:fontFamily="@font/open_sans_bold"
+                        android:paddingVertical="10dp"
+                        android:text="Save"
+                        android:textAllCaps="true"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:textColor="@color/textFocusColor"
+                        android:textIsSelectable="true" />
                 </RelativeLayout>
             </LinearLayout>
         </LinearLayout>

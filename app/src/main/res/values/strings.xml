@@ -2,4 +2,10 @@
     <string name="app_name">ShoppingAssistant</string>
     <string name="total_amount">Total Amount:</string>
     <string name="_0000">0000</string>
+    <string name="log_in">LOG IN</string>
+    <string name="create_account">Don\'t have an account? Sign up here</string>
+    <string name="reg">Registration</string>
+    <string name="sign_in">Create account</string>
+    <string name="log_in_again">Already have an account? Sign in here</string>
+    <string name="title_activity_maps">Map</string>
 </resources>
