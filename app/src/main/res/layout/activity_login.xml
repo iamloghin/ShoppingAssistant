@@ -74,7 +74,6 @@
             android:id="@+id/btn_login"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textIsSelectable="true"
             android:focusable="true"
             android:layout_marginTop="@android:dimen/notification_large_icon_height"
             android:background="@drawable/round_button"

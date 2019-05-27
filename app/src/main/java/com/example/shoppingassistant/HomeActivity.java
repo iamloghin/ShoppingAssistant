@@ -8,20 +8,24 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.shoppingassistant.Model.Data;
+import com.example.shoppingassistant.Model.ItemType;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
-import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -30,8 +34,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
-
 
 import java.text.DateFormat;
 import java.util.Date;
@@ -51,10 +53,11 @@ public class HomeActivity extends AppCompatActivity {
     private TextView totalSumResult;
 
     // Global vars
-    private String type;
+    private ItemType type;
     private int amount;
     private String name;
     private String post_key;
+    private Boolean checked;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,7 +100,7 @@ public class HomeActivity extends AppCompatActivity {
 
                     totalAmount += data.getAmount();
 
-                    String total = String.valueOf(totalAmount + ".00");
+                    String total = totalAmount + ".0";
 
                     totalSumResult.setText(total);
                 }
@@ -128,22 +131,19 @@ public class HomeActivity extends AppCompatActivity {
 
         dialog.setView(myview);
 
-        final EditText type = myview.findViewById(R.id.edt_type);
+        final Spinner type = myview.findViewById(R.id.edt_type);
         final EditText amount = myview.findViewById(R.id.edt_amount);
         final EditText name = myview.findViewById(R.id.edt_name);
-        Button btn = myview.findViewById(R.id.btn_save);
+        Button btn_save = myview.findViewById(R.id.btn_save);
 
-        btn.setOnClickListener(new View.OnClickListener() {
+        btn_save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String mType = type.getText().toString().trim();
+                ItemType mType =  ItemType.valueOf(type.getSelectedItem().toString());
                 String mAmount = amount.getText().toString().trim();
                 String mName = name.getText().toString().trim();
+                Boolean mChecked = false;
 
-                if(TextUtils.isEmpty(mType)){
-                    amount.setError("Required Field...");
-                    return;
-                }
                 if(TextUtils.isEmpty(mAmount)){
                     amount.setError("Required Field...");
                     return;
@@ -157,7 +157,7 @@ public class HomeActivity extends AppCompatActivity {
                 String date = DateFormat.getDateInstance().format(new Date());
                 int amount = Integer.parseInt(mAmount);
 
-                Data data = new Data(mType, amount, mName, date, id);
+                Data data = new Data(mType, amount, mName, date, id, mChecked);
 
                 mDatabase.child(id).setValue(data);
 
@@ -178,14 +178,38 @@ public class HomeActivity extends AppCompatActivity {
                 Data.class,
                 R.layout.item_data,
                 MyViewHolder.class,
-                mDatabase
+                mDatabase.orderByChild("checked")
         ) {
+
             @Override
             protected void populateViewHolder(MyViewHolder myViewHolder, final Data data, final int position) {
-                myViewHolder.setType(data.getType());
+                myViewHolder.setType(data.getType().toString());
                 myViewHolder.setName(data.getName());
                 myViewHolder.setDate(data.getDate());
+                myViewHolder.setChecked(data.getChecked());
                 myViewHolder.setAmount(String.valueOf(data.getAmount()));
+
+                final TextView update_name = myViewHolder.myView.findViewById(R.id.name);
+                final TextView update_type = myViewHolder.myView.findViewById(R.id.type);
+                final TextView update_amount = myViewHolder.myView.findViewById(R.id.amount);
+                final CheckBox update_checked = myViewHolder.myView.findViewById(R.id.checked);
+
+                myViewHolder.myView.findViewById(R.id.checked).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        post_key = getRef(position).getKey();
+                        type = ItemType.valueOf(update_type.getText().toString());
+                        String mAmount = update_amount.getText().toString().trim();
+                        name = update_name.getText().toString().trim();
+
+                        String date = DateFormat.getDateInstance().format(new Date());
+                        int amount = Integer.parseInt(mAmount);
+
+                        Data data = new Data(type, amount, name, date, post_key, update_checked.isChecked());
+
+                        mDatabase.child(post_key).setValue(data);
+                    }
+                });
 
                 myViewHolder.myView.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -195,6 +219,7 @@ public class HomeActivity extends AppCompatActivity {
                         type = data.getType();
                         name = data.getName();
                         amount = data.getAmount();
+                        checked = data.getChecked();
 
                         updateData();
                     }
@@ -214,7 +239,7 @@ public class HomeActivity extends AppCompatActivity {
             myView = itemView;
         }
 
-        public void setType(String type) {
+        void setType(String type) {
             TextView mType = myView.findViewById(R.id.type);
             mType.setText(type);
         }
@@ -224,14 +249,19 @@ public class HomeActivity extends AppCompatActivity {
             mName.setText(name);
         }
 
-        public void setDate(String date) {
+        void setDate(String date) {
             TextView mDate = myView.findViewById(R.id.date);
             mDate.setText(date);
         }
 
-        public void setAmount(String amount) {
+        void setAmount(String amount) {
             TextView mAmount = myView.findViewById(R.id.amount);
             mAmount.setText(String.valueOf(amount));
+        }
+
+         void setChecked(Boolean checked) {
+            CheckBox mChecked = myView.findViewById(R.id.checked);
+            mChecked.setChecked(checked);
         }
     }
 
@@ -265,12 +295,11 @@ public class HomeActivity extends AppCompatActivity {
 
         dialog.setView(mView);
 
-        final EditText edtType = mView.findViewById(R.id.edt_type_upd);
+        final Spinner edtType = mView.findViewById(R.id.edt_type_upd);
         final EditText edtAmount = mView.findViewById(R.id.edt_amount_upd);
         final EditText edtName = mView.findViewById(R.id.edt_name_upd);
 
-        edtType.setText(type);
-        edtType.setSelection(type.length());
+        edtType.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, ItemType.values()));
 
         edtAmount.setText(String.valueOf(amount));
         edtAmount.setSelection(String.valueOf(amount).length());
@@ -284,14 +313,14 @@ public class HomeActivity extends AppCompatActivity {
         btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                type = edtType.getText().toString().trim();
+                type = ItemType.valueOf(edtType.getSelectedItem().toString());
                 String mAmount = edtAmount.getText().toString().trim();
                 name = edtName.getText().toString().trim();
 
                 String date = DateFormat.getDateInstance().format(new Date());
                 int amount = Integer.parseInt(mAmount);
 
-                Data data = new Data(type, amount, name, date, post_key);
+                Data data = new Data(type, amount, name, date, post_key, checked);
 
                 mDatabase.child(post_key).setValue(data);
 
@@ -302,15 +331,15 @@ public class HomeActivity extends AppCompatActivity {
         btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                mDatabase.child(post_key).removeValue();
+                //mDatabase.child(post_key).removeValue();
 
-                startActivity(new Intent(getApplicationContext(), MapsActivity.class));
+                // maps
+                Intent myIntent = new Intent(HomeActivity.this, ShopsMapActivity.class);
+                HomeActivity.this.startActivity(myIntent);
+
                 dialog.dismiss();
             }
         });
-
-
-
 
         dialog.show();
     }

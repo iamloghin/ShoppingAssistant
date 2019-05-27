@@ -30,12 +30,8 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".MapsActivity"
-            android:label="@string/title_activity_maps">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.shoppingassistant.HomeActivity" />
-        </activity>
+            android:name=".ShopsMapActivity"
+            android:label="@string/title_activity_shops_map"></activity>
         <activity android:name=".HomeActivity" />
         <activity android:name=".RegistrationActivity" />
         <activity android:name=".MainActivity">

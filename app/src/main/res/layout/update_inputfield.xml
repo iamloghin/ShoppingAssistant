@@ -4,7 +4,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorSecondBackground">
+    android:background="#151515">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -110,19 +110,23 @@
                     android:layout_weight="2"
                     android:layout_height="wrap_content">
 
-                    <EditText
+                    <Spinner
                         android:id="@+id/edt_type_upd"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
-                        android:maxLines="1"
-                        android:textColor="@color/textFocusColor"
-                        android:textColorHint="@color/textBackColor"
-                        android:background="@drawable/round_input"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:background="@drawable/round_button"
+                        android:entries="@array/ItemType"
                         android:fontFamily="@font/open_sans_light"
+                        android:maxLines="1"
+                        android:paddingVertical="10dp"
                         android:paddingLeft="15dp"
-                        android:paddingVertical="8dp"
-                        />
+                        android:prompt="@string/type_prompt" />
                 </RelativeLayout>
             </LinearLayout>
 
