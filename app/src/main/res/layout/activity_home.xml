@@ -105,7 +105,7 @@
                     android:backgroundTint="@color/bgGrayColor"
                     android:clickable="true"
                     android:focusable="true"
-                    android:src="@mipmap/plus"
+                    android:src="@drawable/plus"
                     app:fabSize="normal"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent" />

@@ -30,17 +30,6 @@
                                           </PersistentState>
                                         </value>
                                       </entry>
-                                      <entry key="clipartAsset">
-                                        <value>
-                                          <PersistentState>
-                                            <option name="values">
-                                              <map>
-                                                <entry key="url" value="jar:file:/C:/Users/Alex/AppData/Local/JetBrains/Toolbox/apps/AndroidStudio/ch-0/191.5549111/plugins/android/lib/android.jar!/images/material_design_icons/action/ic_settings_power_black_24dp.xml" />
-                                              </map>
-                                            </option>
-                                          </PersistentState>
-                                        </value>
-                                      </entry>
                                     </map>
                                   </option>
                                   <option name="values">
@@ -64,17 +53,6 @@
                                             <option name="values">
                                               <map>
                                                 <entry key="color" value="ffffff" />
-                                              </map>
-                                            </option>
-                                          </PersistentState>
-                                        </value>
-                                      </entry>
-                                      <entry key="foregroundClipartAsset">
-                                        <value>
-                                          <PersistentState>
-                                            <option name="values">
-                                              <map>
-                                                <entry key="url" value="jar:file:/C:/Users/Alex/AppData/Local/JetBrains/Toolbox/apps/AndroidStudio/ch-0/191.5549111/plugins/android/lib/android.jar!/images/material_design_icons/content/ic_add_black_24dp.xml" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -119,12 +97,13 @@
                                           </PersistentState>
                                         </value>
                                       </entry>
-                                      <entry key="clipartAsset">
+                                      <entry key="image">
                                         <value>
                                           <PersistentState>
                                             <option name="values">
                                               <map>
-                                                <entry key="url" value="jar:file:/C:/Users/Alex/AppData/Local/JetBrains/Toolbox/apps/AndroidStudio/ch-0/191.5549111/plugins/android/lib/android.jar!/images/material_design_icons/content/ic_add_black_24dp.xml" />
+                                                <entry key="color" value="ffffff" />
+                                                <entry key="trimmed" value="true" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -134,9 +113,12 @@
                                   </option>
                                   <option name="values">
                                     <map>
+                                      <entry key="assetType" value="IMAGE" />
                                       <entry key="backgroundColor" value="202020" />
+                                      <entry key="cropped" value="true" />
                                       <entry key="iconShape" value="CIRCLE" />
-                                      <entry key="outputName" value="plus" />
+                                      <entry key="imageAsset" value="C:\Users\aloghin\Downloads\icons\icons\icon.svg" />
+                                      <entry key="outputName" value="app_icon" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -167,7 +149,44 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="outputIconType" value="ACTIONBAR" />
+                            <entry key="outputIconType" value="LAUNCHER_LEGACY" />
+                          </map>
+                        </option>
+                      </PersistentState>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </PersistentState>
+          </value>
+        </entry>
+        <entry key="vectorWizard">
+          <value>
+            <PersistentState>
+              <option name="children">
+                <map>
+                  <entry key="vectorAssetStep">
+                    <value>
+                      <PersistentState>
+                        <option name="children">
+                          <map>
+                            <entry key="clipartAsset">
+                              <value>
+                                <PersistentState>
+                                  <option name="values">
+                                    <map>
+                                      <entry key="url" value="jar:file:/C:/Users/aloghin/AppData/Local/JetBrains/Toolbox/apps/AndroidStudio/ch-0/191.5549111/plugins/android/lib/android.jar!/images/material_design_icons/content/ic_add_black_24dp.xml" />
+                                    </map>
+                                  </option>
+                                </PersistentState>
+                              </value>
+                            </entry>
+                          </map>
+                        </option>
+                        <option name="values">
+                          <map>
+                            <entry key="outputName" value="plus" />
+                            <entry key="sourceFile" value="C:\Users\aloghin" />
                           </map>
                         </option>
                       </PersistentState>
